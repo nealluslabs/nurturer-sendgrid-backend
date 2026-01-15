@@ -73,16 +73,16 @@ app.post('/api/send-email', async (req, res) => {
         key:process.env.MAILGUN_API_KEY,
        // url: "https://api.mailgun.net" // use if EU domain
        
-      });
+      }); 
     
     console.log("TO IS ===>",to)
     console.log("SUBJECT IS ===>",subject)
 
       try {
         const mailgunData = await mg.messages.create(
-          "sandbox957aae88543548aab8e2938b8466f50a.mailgun.org",
+          "nurturer.ai",
           {
-            from: "Nurturer AI <postmaster@sandbox957aae88543548aab8e2938b8466f50a.mailgun.org>",
+            from: "Mailgun Sandbox <postmaster@nurturer.ai>",
             to: [to && to],
             subject: subject,
     
