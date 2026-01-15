@@ -15,6 +15,10 @@ const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 
+const FormData =  require("form-data"); // form-data v4.0.1  
+const Mailgun =  require("mailgun.js"); // mailgun.js v11.1.0  
+
+
 const app = express();
 const port = process.env.PORT||5008;
 
@@ -50,15 +54,54 @@ app.post('/api/send-email', async (req, res) => {
   try {
     const { to, subject, htmlMessage } = req.body;
 
-    const msg = {
-      to,
-      from: "info@nurturer.ai",
-      subject,
-      text: "This email contains HTML content.",
-      html: htmlMessage     // <-- insert the HTML from the frontend
-    };
+  //  const msg = {
+  //    to,
+  //    from: "info@nurturer.ai",
+  //    subject,
+  //    text: "This email contains HTML content.",
+  //    html: htmlMessage     // <-- insert the HTML from the frontend
+  //  };
 
-    await sgMail.send(msg);
+   // await sgMail.send(msg);
+
+
+
+    async function sendHtmlMessage() {
+      const mailgun = new Mailgun(FormData);
+      const mg = mailgun.client({
+        username: "api",
+        key:process.env.MAILGUN_API_KEY,
+       // url: "https://api.mailgun.net" // use if EU domain
+       
+      });
+    
+    console.log("TO IS ===>",to)
+    console.log("SUBJECT IS ===>",subject)
+
+      try {
+        const mailgunData = await mg.messages.create(
+          "sandbox957aae88543548aab8e2938b8466f50a.mailgun.org",
+          {
+            from: "Nurturer AI <postmaster@sandbox957aae88543548aab8e2938b8466f50a.mailgun.org>",
+            to: [to && to],
+            subject: subject,
+    
+            // 👇 Plain-text fallback (IMPORTANT)
+            text: "Welcome to Nurturer AI! We’re glad to have you.",
+    
+            // 👇 HTML email
+            html: htmlMessage,
+          }
+        );
+    
+        console.log("Email sent===>:", mailgunData);
+      } catch (error) {
+        console.error("Mailgun error:", error);
+      }
+    }
+    
+    
+    sendHtmlMessage()
 
     res.status(200).json({ success: true, message: "Email sent!" });
 
