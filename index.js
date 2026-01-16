@@ -29,13 +29,16 @@ const httpsAgent = new https.Agent({
 
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 
-app.use(bodyParser.json());
-app.use('/api/om', omRoute);
 app.use(cors({
   origin:'*' ,
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
 }));
+
+
+app.use(bodyParser.json());
+app.use('/api/om', omRoute);
+
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -48,7 +51,7 @@ app.use((req, res, next) => {
 
 
 /*============     0*/
-app.post('/api/send-email', async (req, res) => {
+app.post('/send-email', async (req, res) => {
 
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "POST, OPTIONS");
