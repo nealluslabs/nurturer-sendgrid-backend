@@ -49,7 +49,7 @@ app.use((req, res, next) => {
 /*============     0*/
 app.post('/api/send-email', async (req, res) => {
 
-
+  res.header('Access-Control-Allow-Origin', '*');
 
   try {
     const { to, subject, htmlMessage } = req.body;
