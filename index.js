@@ -32,8 +32,9 @@ process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 app.use(bodyParser.json());
 app.use('/api/om', omRoute);
 app.use(cors({
-  origin:'*' /*'https://bonecole-student.netlify.app/'*/,
-methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  origin:'*' ,
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
 }));
 
 app.use((req, res, next) => {
@@ -49,7 +50,9 @@ app.use((req, res, next) => {
 /*============     0*/
 app.post('/api/send-email', async (req, res) => {
 
-  res.header('Access-Control-Allow-Origin', '*');
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
 
   try {
     const { to, subject, htmlMessage } = req.body;
