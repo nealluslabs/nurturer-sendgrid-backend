@@ -88,14 +88,10 @@ app.post('/send-email', async (req, res) => {
         const mailgunData = await mg.messages.create(
           "nurturer.ai",
           {
-            from: "Mailgun Sandbox <postmaster@nurturer.ai>",
-            to: [to && to],
-            subject: subject,
-    
-            // 👇 Plain-text fallback (IMPORTANT)
+            from: "Nurturer AI <info@nurturer.ai>",
+            to: [to],
+            subject,
             text: "Welcome to Nurturer AI! We’re glad to have you.",
-    
-            // 👇 HTML email
             html: htmlMessage,
           }
         );
