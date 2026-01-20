@@ -87,8 +87,8 @@ app.post('/send-email', async (req, res) => {
       try {
         const mailgunData = await mg.messages.create(
           "nurturer.ai",
-          {
-            from: "Nurturer AI <info@nurturer.ai>",
+          { //"Nurturer AI <info@nurturer.ai>"
+            from:"info@nurturer.ai",
             to: [to],
             subject,
             text: "Welcome to Nurturer AI! We’re glad to have you.",
