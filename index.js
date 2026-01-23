@@ -77,7 +77,7 @@ app.post('/send-email', async (req, res) => {
       const mg = mailgun.client({
         username: "api",
         key:process.env.MAILGUN_API_KEY,
-       // url: "https://api.mailgun.net" // use if EU domain
+       url: "https://api.mailgun.net" // use if EU domain
        
       }); 
     
@@ -98,12 +98,18 @@ app.post('/send-email', async (req, res) => {
     
         console.log("Email sent===>:", mailgunData);
       } catch (error) {
-        console.error("Mailgun error:", error);
+       // console.error("Mailgun error:", error);
+
+        console.error("Mailgun error:", error?.message);
+        console.error("Mailgun error data:", error?.response?.data);
+
       }
     }
     
     
     sendHtmlMessage()
+
+    
 
     res.status(200).json({ success: true, message: "Email sent!" });
 
