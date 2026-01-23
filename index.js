@@ -85,16 +85,31 @@ app.post('/send-email', async (req, res) => {
     console.log("SUBJECT IS ===>",subject)
 
 
-     await mg.messages.create(
-      "nurturer.ai",
-      { //"Nurturer AI <info@nurturer.ai>"
-        from:"Nurturer AI <info@nurturer.ai>",
-        to: [to],
-        subject,
-        text: "Welcome to Nurturer AI! We’re glad to have you.",
-        html: htmlMessage,
-      }
-    );
+    const domain = "nurturer.ai";
+const apiKey = process.env.MAILGUN_API_KEY;
+
+// Use EU endpoint if your domain is EU
+// const baseURL = "https://api.eu.mailgun.net/v3";
+const baseURL = "https://api.mailgun.net/v3";
+
+const auth = Buffer.from(`api:${apiKey}`).toString("base64");
+
+await axios.post(
+  `${baseURL}/${domain}/messages`,
+  new URLSearchParams({
+    from: "Nurturer AI <info@nurturer.ai>",
+    to: to,
+    subject: subject,
+    text: "Welcome to Nurturer AI! We’re glad to have you.",
+    html: htmlMessage,
+  }),
+  {
+    headers: {
+      Authorization: `Basic ${auth}`,
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
 
 
 
