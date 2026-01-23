@@ -83,7 +83,7 @@ app.post('/send-email', async (req, res) => {
     
     console.log("TO IS ===>",to)
     console.log("SUBJECT IS ===>",subject)
-
+    console.log("MAILGUN DETAILS ARE ===>",mg)
       try {
         const mailgunData = await mg.messages.create(
           "nurturer.ai",
