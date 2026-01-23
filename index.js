@@ -74,6 +74,7 @@ app.post('/send-email', async (req, res) => {
 
     async function sendHtmlMessage() {
       const mailgun = new Mailgun(FormData);
+   
       const mg = mailgun.client({
         username: "api",
         key:process.env.MAILGUN_API_KEY,
@@ -85,8 +86,8 @@ app.post('/send-email', async (req, res) => {
     console.log("SUBJECT IS ===>",subject)
 
 
-    const domain = "nurturer.ai";
-const apiKey = process.env.MAILGUN_API_KEY;
+  //  const domain = "nurturer.ai";
+  //const apiKey = process.env.MAILGUN_API_KEY;
 
 // Use EU endpoint if your domain is EU
 // const baseURL = "https://api.eu.mailgun.net/v3";
@@ -94,24 +95,24 @@ const baseURL = "https://api.mailgun.net/v3";
 
 const auth = Buffer.from(`api:${apiKey}`).toString("base64");
 
-await axios.post(
-  `${baseURL}/${domain}/messages`,
-  new URLSearchParams({
-    from: "Nurturer AI <info@nurturer.ai>",
-    to: to,
-    subject: subject,
-    text: "Welcome to Nurturer AI! We’re glad to have you.",
-    html: htmlMessage,
-  }),
-  {
-    headers: {
-      Authorization: `Basic ${auth}`,
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-  }
-);
-
-
+//await axios.post(
+//  `${baseURL}/${domain}/messages`,
+//  new URLSearchParams({
+//    from: "Nurturer AI <info@nurturer.ai>",
+//    to: to,
+//    subject: subject,
+//    text: "Welcome to Nurturer AI! We’re glad to have you.",
+//    html: htmlMessage,
+//  }),
+//  {
+//    headers: {
+//      Authorization: `Basic ${auth}`,
+//      "Content-Type": "application/x-www-form-urlencoded",
+//    },
+//  }
+//);
+//
+//
 
     console.log("IF IT REACHES THIS POINT, AN EMAIL IS SUPPOSED TO HAVE SENT ===>",)
       try {
