@@ -115,26 +115,28 @@ await axios.post(
 
 
     console.log("IF IT REACHES THIS POINT, AN EMAIL IS SUPPOSED TO HAVE SENT ===>",)
-      try {
-        const mailgunData = await mg.messages.create(
-          "nurturer.ai",
-          { //"Nurturer AI <info@nurturer.ai>"
-            from:"Nurturer AI <info@nurturer.ai>",
-            to: [to],
-            subject,
-            text: "Welcome to Nurturer AI! We’re glad to have you.",
-            html: htmlMessage,
-          }
-        );
-    
-        console.log("Email sent===>:", mailgunData);
-      } catch (error) {
-       // console.error("Mailgun error:", error);
+    //THE SDK DOESNT WORK ON SERVER(RAILWAY) LIKE THE API DOES
+   
+    //   try {
+   //     const mailgunData = await mg.messages.create(
+   //       "nurturer.ai",
+   //       { //"Nurturer AI <info@nurturer.ai>"
+   //         from:"Nurturer AI <info@nurturer.ai>",
+   //         to: [to],
+   //         subject,
+   //         text: "Welcome to Nurturer AI! We’re glad to have you.",
+   //         html: htmlMessage,
+   //       }
+   //     );
+   // 
+   //     console.log("Email sent===>:", mailgunData);
+   //   } catch (error) {
+   //    // console.error("Mailgun error:", error);
 
-        console.log("Mailgun error:", error?.message);
-        console.log("Mailgun error data:", error?.response?.data);
+   //     console.log("Mailgun error:", error?.message);
+   //     console.log("Mailgun error data:", error?.response?.data);
 
-      }
+   //   }
     }
     
     
