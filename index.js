@@ -83,7 +83,22 @@ app.post('/send-email', async (req, res) => {
     
     console.log("TO IS ===>",to)
     console.log("SUBJECT IS ===>",subject)
-    console.log("MAILGUN DETAILS ARE ===>",mg)
+
+
+     await mg.messages.create(
+      "nurturer.ai",
+      { //"Nurturer AI <info@nurturer.ai>"
+        from:"Nurturer AI <info@nurturer.ai>",
+        to: [to],
+        subject,
+        text: "Welcome to Nurturer AI! We’re glad to have you.",
+        html: htmlMessage,
+      }
+    );
+
+
+
+    console.log("IF IT REACHES THIS POINT, AN EMAIL IS SUPPOSED TO HAVE SENT ===>",)
       try {
         const mailgunData = await mg.messages.create(
           "nurturer.ai",
@@ -100,8 +115,8 @@ app.post('/send-email', async (req, res) => {
       } catch (error) {
        // console.error("Mailgun error:", error);
 
-        console.error("Mailgun error:", error?.message);
-        console.error("Mailgun error data:", error?.response?.data);
+        console.log("Mailgun error:", error?.message);
+        console.log("Mailgun error data:", error?.response?.data);
 
       }
     }
