@@ -98,10 +98,10 @@ const auth = Buffer.from(`api:${apiKey}`).toString("base64");
 await axios.post(
   `${baseURL}/${domain}/messages`,
   new URLSearchParams({
-    from: `${name} - Nurturer AI <info@nurturer.ai>`,
+    from: `${name} -  <info@nurturer.ai>`,
     to: to,
     subject: subject,
-    text: "Welcome to Nurturer AI! We’re glad to have you.",
+    text: `Message from - ${name}.`,
     html: htmlMessage,
   }),
   {
