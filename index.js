@@ -142,7 +142,7 @@ await axios.post(
     }
     
     
-    sendHtmlMessage()
+  await  sendHtmlMessage()
 
     
 
