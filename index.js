@@ -58,7 +58,7 @@ app.post('/send-email', async (req, res) => {
   res.header("Access-Control-Allow-Headers", "Content-Type");
 
   try {
-    const { to, subject, htmlMessage } = req.body;
+    const { to, subject, htmlMessage,name } = req.body;
 
   //  const msg = {
   //    to,
@@ -98,7 +98,7 @@ const auth = Buffer.from(`api:${apiKey}`).toString("base64");
 await axios.post(
   `${baseURL}/${domain}/messages`,
   new URLSearchParams({
-    from: "Nurturer AI <info@nurturer.ai>",
+    from: `${name} - Nurturer AI <info@nurturer.ai>`,
     to: to,
     subject: subject,
     text: "Welcome to Nurturer AI! We’re glad to have you.",
