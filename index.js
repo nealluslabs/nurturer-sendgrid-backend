@@ -1,3 +1,6 @@
+export const runtime = "nodejs";
+
+
 const express = require('express');
 const axios = require('axios');
 const bodyParser = require('body-parser');
