@@ -60,17 +60,7 @@ app.post('/send-email', async (req, res) => {
   res.header("Access-Control-Allow-Headers", "Content-Type");
 
   try {
-    const { to, subject, htmlMessage,name } = req.body;
-
-  //  const msg = {
-  //    to,
-  //    from: "info@nurturer.ai",
-  //    subject,
-  //    text: "This email contains HTML content.",
-  //    html: htmlMessage     // <-- insert the HTML from the frontend
-  //  };
-
-   // await sgMail.send(msg);
+    const { to, subject, htmlMessage,name,userEmail } = req.body;
 
 
 
@@ -105,6 +95,7 @@ await axios.post(
     subject: subject,
     text: `Message from  ${name}.`,
     html: htmlMessage,
+    "h:Reply-To": `${name} <${userEmail}>`,
   }),
   {
     headers: {
@@ -117,28 +108,7 @@ await axios.post(
 
 
     console.log("IF IT REACHES THIS POINT, AN EMAIL IS SUPPOSED TO HAVE SENT ===>",)
-    //THE SDK DOESNT WORK ON SERVER(RAILWAY) LIKE THE API DOES
-   
-    //   try {
-   //     const mailgunData = await mg.messages.create(
-   //       "nurturer.ai",
-   //       { //"Nurturer AI <info@nurturer.ai>"
-   //         from:"Nurturer AI <info@nurturer.ai>",
-   //         to: [to],
-   //         subject,
-   //         text: "Welcome to Nurturer AI! We’re glad to have you.",
-   //         html: htmlMessage,
-   //       }
-   //     );
-   // 
-   //     console.log("Email sent===>:", mailgunData);
-   //   } catch (error) {
-   //    // console.error("Mailgun error:", error);
-
-   //     console.log("Mailgun error:", error?.message);
-   //     console.log("Mailgun error data:", error?.response?.data);
-
-   //   }
+  
     }
     
     
